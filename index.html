@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="/bootstrap/css/bootstrap.css" />
+		<link rel="stylesheet" href="/bootstrap/css/styles.css" />
+	
+		<title>Pipeline and Team Generator</title>
+	</head>
+	<body>
+		
+		
+		<script type="text/x-handlebars">
+			<div class="navbar">
+			<div class="navbar-inner">
+				<a class="brand" href="#">Pipeline &amp; Team Generator</a>
+				
+				<ul class="nav">
+					<li>
+						{{#link-to 'twod'}}2D Pipeline{{/link-to}}
+					</li>
+					<li>
+						{{#link-to 'threed'}}3D Pipeline{{/link-to}}
+					</li>
+					<li>
+						<a href="#">Link</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		{{outlet}}
+		</script>
+		<!--2D Template -->
+		<script type="text/x-handlebars" id="twod">
+		<div class="row">
+			<div class="span4">
+				<img src="/img/2DPipeline.jpg" />
+			</div>
+
+			<div class="span4">
+				<h4>2D Roles</h4>
+				<!--<ul>
+					<li>Casting &amp; Recording</li>
+					<li>Script</li>
+					<li>Design</li>
+					<li>Storyboard</li>
+					<li>Color Styling</li>
+					<li>Workbook</li>
+					<li>Rough Layout</li>
+					<li>Rough Animation</li>
+					<li>Layout Clean Up</li>
+					<li>Animation Clean Up</li>
+					<li>Ink &amp; Paint</li>
+					<li>Background Painting</li>
+					<li>Compositing </li>
+					<li>Editing</li>
+				</ul>-->
+				
+	{{view Ember.Select
+       contentBinding="designations"
+       optionValuePath="content.id"
+       optionLabelPath="content.designation"
+       selectionBinding="selectedDesignation"}}
+<button {{action 'filter'}}>Filter</button>
+			</div>
+			
+			<div class="span3">
+				<h4>People with Roles</h4>
+				{{input type="text" value=searchText}}
+			 <div class="row">
+			 	
+				 <div class="span2">	
+						<ul>
+							
+							{{#each item in filteredContent}}
+			  					<li>{{#link-to 'twoduser' item}}{{item.firstname}}&nbsp;{{item.lastname}} {{/link-to}}</li><!-- </p><button {{action "moreinfo"}}>Click me</button> -->
+			   				{{/each}}
+			   					
+			    		</ul>
+					</div>
+					<div class="row">
+						<div class="span3">
+							{{outlet}}
+						</div>
+					</div>
+				</div>
+		</div>
+		</script>
+		
+		
+	
+		<!--3D Template -->
+		<script type="text/x-handlebars" id="threed">
+		<div class="row">
+			<div class="span4">
+				<img src="/img/2DPipeline.jpg" />
+			</div>
+
+			<div class="span4">
+				<h4>3D Roles</h4>
+				<ul>
+					<li>Casting &amp; Recording</li>
+					<li>Script</li>
+					<li>Design</li>
+					<li>Storyboard</li>
+					<li>Color Styling</li>
+					<li>Workbook</li>
+					<li>Rough Layout</li>
+					<li>Rough Animation</li>
+					<li>Layout Clean Up</li>
+				</ul>
+			</div>
+			
+			<div class="span3">
+				<h4>People with Roles</h4>
+			</div>
+		</div>
+		</script>
+		
+		<script type="text/x-handlebars" data-template-name="twoduser">
+		<!-- more Info-->
+		<div class="row">
+			<div class="span3" id="moreinfo">
+			  <b>Full Name:</b> {{firstname}} {{lastname}}
+			  <br />
+			  <b>EMail:</b> {{email}}
+			  <br />
+			  Address: {{address}}
+			  <br />
+			  Phone: {{phone}}
+			  <br />
+			  Experience: {{experience}}
+			  <br />
+			  Designation: {{designation}}
+			</div>
+		</div>
+		
+		</script>
+		
+	    <!--Attach Script Files -->
+	    <script src="/js/libs/jquery-2.0.3.min.js"></script>
+        <script src="/js/libs/handlebars.js"></script>
+		<script src="/js/libs/ember.js"></script>
+		<script src="/js/app.js"></script>
+		<script src="/bootstrap/js/bootstrap.js"></script> 
+	</body>
+</html>
+
