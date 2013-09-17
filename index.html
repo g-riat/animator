@@ -39,29 +39,14 @@
 
 			<div class="span4">
 				<h4>2D Roles</h4>
-				<!--<ul>
-					<li>Casting &amp; Recording</li>
-					<li>Script</li>
-					<li>Design</li>
-					<li>Storyboard</li>
-					<li>Color Styling</li>
-					<li>Workbook</li>
-					<li>Rough Layout</li>
-					<li>Rough Animation</li>
-					<li>Layout Clean Up</li>
-					<li>Animation Clean Up</li>
-					<li>Ink &amp; Paint</li>
-					<li>Background Painting</li>
-					<li>Compositing </li>
-					<li>Editing</li>
-				</ul>-->
-				
 	{{view Ember.Select
        contentBinding="designations"
        optionValuePath="content.id"
        optionLabelPath="content.designation"
        selectionBinding="selectedDesignation"}}
-<button {{action 'filter'}}>Filter</button>
+       <br />
+		<button {{action 'filter'}}>Filter</button>
+		<button {{action 'refresh'}}>Refresh</button>
 			</div>
 			
 			<div class="span3">
@@ -85,6 +70,7 @@
 					</div>
 				</div>
 		</div>
+		</div>
 		</script>
 		
 		
@@ -98,7 +84,7 @@
 
 			<div class="span4">
 				<h4>3D Roles</h4>
-				<ul>
+				<!-- <ul>
 					<li>Casting &amp; Recording</li>
 					<li>Script</li>
 					<li>Design</li>
@@ -108,15 +94,62 @@
 					<li>Rough Layout</li>
 					<li>Rough Animation</li>
 					<li>Layout Clean Up</li>
-				</ul>
+				</ul> -->
+					{{view Ember.Select
+       contentBinding="designations"
+       optionValuePath="content.id"
+       optionLabelPath="content.designation"
+       selectionBinding="selectedDesignation"}}
+       <br />
+		<button {{action 'filter'}}>Filter</button>
+		<button {{action 'refresh'}}>Refresh</button>
 			</div>
 			
 			<div class="span3">
 				<h4>People with Roles</h4>
+				{{input type="text" value=searchText}}
+			 <div class="row">
+			 	
+				 <div class="span2">	
+						<ul>
+							
+							{{#each item in filteredContent}}
+			  					<li>{{#link-to 'threeduser' item}}{{item.firstname}}&nbsp;{{item.lastname}} {{/link-to}}</li>
+			   				{{/each}}
+			   					
+			    		</ul>
+					</div>
+					<div class="row">
+						<div class="span3">
+							{{outlet}}
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 		</script>
 		
+		<!--3D User -->
+		<script type="text/x-handlebars" data-template-name="threeduser">
+		<!-- more Info-->
+		<div class="row">
+			<div class="span3" id="moreinfo">
+			  <b>Full Name:</b> {{firstname}} {{lastname}}
+			  <br />
+			  <b>EMail:</b> {{email}}
+			  <br />
+			  Address: {{address}}
+			  <br />
+			  Phone: {{phone}}
+			  <br />
+			  Experience: {{experience}}
+			  <br />
+			  Designation: {{designation}}
+			</div>
+		</div>
+		
+		</script>
+		<!--2D User -->
 		<script type="text/x-handlebars" data-template-name="twoduser">
 		<!-- more Info-->
 		<div class="row">
